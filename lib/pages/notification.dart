@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+// This page contains the code of the function to display the notification
+
 class NotificationClass{
  static Future initiliaze (FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async{
   var androidInitialize = new AndroidInitializationSettings('mipmap/ic_launcher');
@@ -8,6 +10,7 @@ class NotificationClass{
   await flutterLocalNotificationsPlugin.initialize(initializationSettings);
  }
 
+ // Function to display the notification
  static Future showBigTextNotification(
  {var id = 0, required String title, required String body, var payload, required FlutterLocalNotificationsPlugin fln}
  ) async {

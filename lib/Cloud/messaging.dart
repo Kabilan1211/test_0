@@ -7,7 +7,6 @@ import 'package:test_0/pages/notification.dart';
 
 // This page contains code to display the notification
 
-// Function used to get the push notification token and to display the notification in the application.
 
 String title1 = "";
 String title2 = "";
@@ -25,15 +24,11 @@ String time3 = "";
 String time4 = "";
 String time5 = "";
 
-    void _handleApp(RemoteMessage message) {
-      print("On Message Opened");
-      fetchLast5Data();
-      navigatorKey.currentState?.pushNamed('/help');
-    }
-
+// It is the class which contains the functions used to get the push notification token and to display the notification in the application.
 class FirebaseApijob {
   final _firebaseMessaging = FirebaseMessaging.instance;
 
+  // Function to check the notification permission for the application
   void NotificationSetting() async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
 
@@ -49,32 +44,33 @@ class FirebaseApijob {
     print('User Granted permission: ${settings.authorizationStatus}');
   }
 
+  // This function is used to initialize the FCM service
   Future<void> initNotifications() async {
     await _firebaseMessaging.requestPermission();
     final fCMToken = await _firebaseMessaging.getToken();
     print("Token: $fCMToken");
 
-    // final RemoteMessage? remoteMessage = await FirebaseMessaging.instance.getInitialMessage();
-
-    FirebaseMessaging.onMessageOpenedApp.listen(_handleApp);
+    // This function is used to display the notification when the application is in background
     FirebaseMessaging.onBackgroundMessage((handleBackgroundMessaging));
+
+    // This function is used to display the notification when the application is in foreground
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       if (message.notification != null) {
-        lastTitle = message.notification!.title ?? "";
-        lastBody = message.notification!.body ?? "";
-        lastTime = DateTime.now().toString();
+        // Function which trigger the notification
         await NotificationClass.showBigTextNotification(
           title: message.notification!.title ?? "",
           body: message.notification!.body ?? "",
           fln: flutterLocalNotificationsPlugin,
         );
+
+        // Updating the last 5 alerts
         fetchLast5Data();
+
+        // playing the alarm sound
         playSound();
       } else {
         print("Message doesn't contains any notification");
       }
     });
-
-
   }
 }

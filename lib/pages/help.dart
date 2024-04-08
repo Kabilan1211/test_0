@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test_0/main.dart';
 
+// This is the help page, which contains a simple text
 class HelpPage extends StatefulWidget {
   const HelpPage({super.key});
 
@@ -24,7 +24,7 @@ class _HelpPageState extends State<HelpPage> {
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children:<Widget> [
+            children:const <Widget> [
               Text("For helps, contact your administrator !"),
             ],
           ),

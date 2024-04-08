@@ -9,7 +9,9 @@ import 'package:test_0/widgets/textField.dart';
 String emailId = "";
 String password = "";
 
-//Function to check the password is strong or not
+// This page contains the code for login page
+
+// Function to check the password is strong or not
 bool isPasswordStrong(String password) {
   const minLength = 8;
   final hasUppercase = RegExp(r'[A-Z]').hasMatch(password);
@@ -39,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
   final AuthService _auth = AuthService();
   String errorText = "";
 
-  //Function  to validate the email address format
+  // Function  to validate the email address format
     String? _validateEmail(String? value) {
       final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
       if (!emailRegex.hasMatch(value!)) {
@@ -48,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
       return null;
     }
 
-  //Function to validate the password is strong
+  // Function to validate the password is strong
     String? _validatePassword(String? value) {
       if (value == null || value.isEmpty) {
         return 'Enter a password';
@@ -61,6 +63,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    // This code is the front end of the login page
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue.shade200,
@@ -92,24 +96,35 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 20,),
                 ElevatedButton(
                   onPressed: () async {
+
+                    // This function happens when the login button is pressed and it will validate the forms
                     if(_formKey.currentState!.validate()){
                       setState(() {
                         emailId = _emailController.text;
                         password = _passwordController.text;
                       });
+
+                      // It will fetch the reset state from the database
                       fetchData(emailId);
+                      // It will login the user and store the result in the variable result
                       dynamic result = await _auth.logIn(emailId, password);
                       print(result);
+
+                      // If the result is null, means the user entered wrong credentials and it will display the errorText
                       if(result == null){
                       setState(() {
                         errorText = "Bad Credentials";
                         print("Bad Credentials");
                       });
                       }
+
                     else{
+
+                      // if the reset state is zero then the user will be navigated to the home screen
                       if(resetPass == 0){
                         Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=> const MyHomePage()));
                       }
+                      // if the reset state is one then the user will be navigated to the reset password page
                       else{
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ResetPass()));
                       }

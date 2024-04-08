@@ -5,6 +5,8 @@ import 'package:test_0/Cloud/Auth.dart';
 import 'package:test_0/main.dart';
 import 'package:test_0/pages/Login.dart';
 
+// This page is used to check the local storage for the email and password, and then it will login the user
+
 class LoginControl extends StatefulWidget {
   const LoginControl({super.key});
 
@@ -22,9 +24,14 @@ class _LoginControlState extends State<LoginControl> {
           if (snapshot.connectionState == ConnectionState.done) {
             // Check if user credentials are available
             if (snapshot.hasData && snapshot.data['email'] != "" && snapshot.data['password'] != "") {
-              // Auto-login with saved credentials
+              // It will fetch the user email and password and login the user
+              emailId = snapshot.data['email'];
+              password = snapshot.data['password'];
+              _auth.logIn(emailId, password);
+              // Once login is done, it will navigate the user to home page
               return const MyHomePage();
             } else {
+              // If there is no email and password present, it will navigate the user to login page.
               return const LoginPage();
             }
           } else {

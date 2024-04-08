@@ -1,9 +1,6 @@
 // ignore_for_file: file_names, unnecessary_string_interpolations, non_constant_identifier_names
 import 'package:flutter/material.dart';
-import 'package:test_0/pages/Login.dart';
 import 'package:test_0/pages/help.dart';
-import 'package:test_0/pages/updatePassword.dart';
-import 'notification.dart';
 
 // This is Navigation drawer page
 

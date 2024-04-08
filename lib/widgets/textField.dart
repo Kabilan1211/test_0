@@ -42,7 +42,6 @@ class _CustomTextField1State extends State<CustomTextField1> {
           hintStyle: const TextStyle(color: Colors.black),
           fillColor: Colors.grey.shade200,
           filled: true,
-          // errorText: widget.validator(widget.controller.text),
         ),
         validator: (val){
           setState(() {

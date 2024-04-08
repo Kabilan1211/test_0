@@ -109,8 +109,9 @@ class _ResetPassState extends State<ResetPass> {
                     if (_resetPassword.text == _checker.text) {
                       //Checking that the new password is not old password
                       if (_passwordController.text != _checker.text) {
-                        //Checking the password in the database  is matching with the entered password
+                        // This function is used to update the password in the user                        
                         _updatePassword(); 
+                        // This function is used to update the password and reset state in the database
                         updateData(_checker.text);
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const MyHomePage()));
                       }
