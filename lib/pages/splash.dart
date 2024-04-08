@@ -9,7 +9,7 @@ class Splash extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       splash: Text("Welcome", 
-      style: TextStyle(color: Colors.deepPurple.shade200, fontSize: 50, fontWeight: FontWeight.bold),
+      style: TextStyle(color: Colors.blue.shade200, fontSize: 50, fontWeight: FontWeight.bold),
       ),
       backgroundColor: Colors.white,
       duration: 2000,

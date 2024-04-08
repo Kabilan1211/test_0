@@ -2,9 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:test_0/Cloud/Auth.dart';
+import 'package:test_0/Cloud/database.dart';
 import 'package:test_0/main.dart';
+import 'package:test_0/pages/updatePassword.dart';
 import 'package:test_0/widgets/textField.dart';
-
 String emailId = "";
 String password = "";
 
@@ -57,11 +58,12 @@ class _LoginPageState extends State<LoginPage> {
       return null;
     }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple.shade200,
+        backgroundColor: Colors.blue.shade200,
         title: const Text("LOGIN"),
         centerTitle: true,
       ),
@@ -95,6 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                         emailId = _emailController.text;
                         password = _passwordController.text;
                       });
+                      fetchData(emailId);
                       dynamic result = await _auth.logIn(emailId, password);
                       print(result);
                       if(result == null){
@@ -104,11 +107,16 @@ class _LoginPageState extends State<LoginPage> {
                       });
                       }
                     else{
+                      if(resetPass == 0){
                         Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=> const MyHomePage()));
+                      }
+                      else{
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ResetPass()));
+                      }
                     }
                     }
                   },
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple), 
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.blue), 
                   child: const Text("Login"),
                   ),
                 const SizedBox(height: 10,),

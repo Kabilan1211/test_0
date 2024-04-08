@@ -2,11 +2,13 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:test_0/pages/Login.dart';
 import 'package:test_0/widgets/user.dart';
 import 'package:test_0/Cloud/database.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //This page is used to provide the authentication functions
-
+String ? savedEmail = "";
 class AuthService{
 
   // Function used to initialize the firebase
@@ -15,6 +17,7 @@ class AuthService{
   }
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  var currentUser = FirebaseAuth.instance.currentUser;
 
   // Function used to save the user unique ID
   CustomUser? _userFromFirebaseUser(User? user){
@@ -31,7 +34,6 @@ class AuthService{
     try{
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User? firebaseUser = result.user;
-      await DatabaseService(uid: firebaseUser!.uid).updateUserData('Kabilan S');
       return _userFromFirebaseUser(firebaseUser);
     }
     catch(e){
@@ -47,6 +49,7 @@ class AuthService{
       password: password,
     );
     User? firebaseUser = result.user; 
+    await _saveUserCredentials(email, password);
     return _userFromFirebaseUser(firebaseUser);
   } catch (e) {
     // throw Exception('Registration failed. Please try again.');
@@ -64,9 +67,34 @@ class AuthService{
   }
 }
 
+Future signOut() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear(); // Clear user credentials from local storage
+    print(prefs);
+    return await signOutUser();
+  }
+
   // Function used to Reset Password
-  Future resetPassword(String email) async{
-    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+  resetPassword(String email, String oldPassword, String newPassword) async{
+    var cred = EmailAuthProvider.credential(email: email,password: password);
+    await currentUser!.reauthenticateWithCredential(cred).then((value) {
+      currentUser!.updatePassword(newPassword);
+    });
+  }
+
+    Future _saveUserCredentials(String email, String password) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('email', email);
+    prefs.setString('password', password);
+    print(email);
+    print(password);
+  }
+
+    Future<Map<String, String>> getUserCredentials() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    savedEmail = prefs.getString('email');
+    String? savedPassword = prefs.getString('password');
+    return {'email': savedEmail ?? "", 'password': savedPassword ?? ""};
   }
 
 }

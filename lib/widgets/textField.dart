@@ -31,12 +31,12 @@ class _CustomTextField1State extends State<CustomTextField1> {
         controller: widget.controller,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.deepPurple.shade200),
+            borderSide: BorderSide(color: Colors.blue.shade200),
             borderRadius: BorderRadius.circular(12),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Colors.deepPurple),
+            borderSide: const BorderSide(color: Colors.blue),
           ),
           hintText: widget.hintText,
           hintStyle: const TextStyle(color: Colors.black),

@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_0/Constant/loginControl.dart';
 import 'package:test_0/pages/Login.dart';
 import 'package:test_0/pages/splash.dart';
 import 'package:test_0/widgets/user.dart';
@@ -19,7 +20,7 @@ class Wrapper extends StatelessWidget {
 
      print(user);
     if (user == null) {
-      return const LoginPage();
+      return const LoginControl();
     } else {
       return const Splash();
     }

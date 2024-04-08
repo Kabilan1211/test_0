@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, unnecessary_string_interpolations, non_constant_identifier_names
 import 'package:flutter/material.dart';
 import 'package:test_0/pages/Login.dart';
+import 'package:test_0/pages/help.dart';
 import 'package:test_0/pages/updatePassword.dart';
 import 'notification.dart';
 
@@ -14,68 +15,43 @@ class NavBar extends StatelessWidget {
 
     //Returning a drawer to access various page route from the home page itself
     return Drawer(
-      backgroundColor: Colors.deepPurple.shade200,
+      backgroundColor: Colors.blue.shade200,
       child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
-          children: <Widget>[
-            const Center(
+          children: const <Widget>[
+            Center(
               child: CircleAvatar(
                 backgroundImage: AssetImage('assets/profile.jpg'),
                 radius: 50,
               ),
             ),
-            const Divider(height: 50, color: Colors.deepPurple),
-            const Text(
+            Divider(height: 50, color: Colors.blue),
+            Text(
               'NAME',
               style: TextStyle(
-                color: Colors.deepPurple,
+                color: Colors.blue,
                 letterSpacing: 2.0,
               ),
             ),
-            const SizedBox(
+            SizedBox(
               height: 10,
             ),
-            const Text(
+            Text(
               'Kabilan S',
               style: TextStyle(
-                color: Colors.deepPurple,
+                color: Colors.blue,
                 letterSpacing: 2.0,
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(
+            SizedBox(
               height: 30,
             ),
-            Row(
-              children: [
-                const Icon(
-                  Icons.email,
-                  color: Colors.deepPurple,
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  '$emailId',
-                  style: const TextStyle(
-                    color: Colors.deepPurple,
-                    letterSpacing: 2.0,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
+            SizedBox(
               height: 20,
             ),
-            const Tile(
-                icons: Icon(Icons.notifications),
-                text: "Notification",
-                fun: NotificationScreen()),
-            const Tile(
-              icons: Icon(Icons.update),
-              text: "Update", 
-              fun: UpdatePassword())
+            Tile(icons:Icon(Icons.help), text: "Help", fun: HelpPage()),
           ]),
     );
   }
@@ -94,16 +70,16 @@ class Tile extends StatelessWidget {
     return Column(
       children: [
         const Divider(
-          color: Colors.deepPurple,
+          color: Colors.blue,
         ),
         ListTile(
           title: Text(text),
           leading: icons ??
               const Icon(
                 Icons.abc,
-                color: Colors.deepPurple,
+                color: Colors.blue,
               ),
-          iconColor: Colors.deepPurple,
+          iconColor: Colors.blue,
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => fun),
