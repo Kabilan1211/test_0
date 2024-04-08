@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:test_0/pages/Login.dart';
 import 'package:test_0/widgets/user.dart';
-import 'package:test_0/Cloud/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //This page is used to provide the authentication functions

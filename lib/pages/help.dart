@@ -22,9 +22,9 @@ class _HelpPageState extends State<HelpPage> {
           padding: const EdgeInsets.all(10),
           height: MediaQuery.of(context).size.height*0.8,
           width: double.infinity,
-          child: Column(
+          child: const Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children:const <Widget> [
+            children: <Widget> [
               Text("For helps, contact your administrator !"),
             ],
           ),
